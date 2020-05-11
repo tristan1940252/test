@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash/
 # filename: qu1.sh
 # Description: Trouve le plus gros nombre de la liste d'argument
 # Arguments: plusieurs chiffres

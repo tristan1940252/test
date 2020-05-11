@@ -1,3 +1,11 @@
+#!/bin/bash/
+# filename: qu5.sh
+# Description: Regarde si des nombres aléatoires sont des id de processus
+# Arguments: Aucun
+# Auteur: Tristan Brault Ouellette
+# Variable modifiable: Le nombres de nombres aléatoires 
+#################################
+
 array=()
 erreur="false"
 read -p "Nombres d'éléments à ajouter dans l'array? (chaîne vide pour terminer) " nb
@@ -13,7 +21,7 @@ if [[ $erreur -eq "false"  ]]; then
     for ((i=0; i < $nb; i++)); do
         array+=($RANDOM)
     done
-array+=(13063)
+
 	for i in ${array[@]}; do
 	j=$(ps -o pid= $i)
 	if [[ !  ( -z $j ) ]]; then
@@ -22,5 +30,3 @@ array+=(13063)
 	fi
 done
 fi
-
-

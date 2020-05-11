@@ -1,4 +1,3 @@
-
 # filename: qu2.sh
 # Description: Menu offrant plusieurs choix d'action
 # Arguments: Aucun

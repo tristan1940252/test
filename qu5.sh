@@ -17,16 +17,17 @@ read -p "Nombres d'éléments à ajouter dans l'array? (chaîne vide pour termin
         erreur= "true"
 	echo "chiffre"
     fi
-if [[ $erreur -eq "false"  ]]; then
+if [[ $erreur -eq "false" ]]; then
     for ((i=0; i < $nb; i++)); do
         array+=($RANDOM)
     done
 
 	for i in ${array[@]}; do
-	j=$(ps -o pid= $i)
-	if [[ !  ( -z $j ) ]]; then
-	echo "$i est un processus"
-	else echo "$i n'est pas un processus"
+	pid=$(ps -o pid= $i)
+    name=$(ps -p $i -o comm=)
+	if [[ !  ( -z $pid ) ]]; then
+		echo "$i, $name est un processus"
+		else echo "$i n'est pas un processus"
 	fi
 done
 fi

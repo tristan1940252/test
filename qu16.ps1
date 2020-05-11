@@ -8,34 +8,14 @@ $item est la premiere occurence, $item2 les autres $length est la longueur de l'
 $alrExist est si l'item est deja dans $already donc deja traiter
 Sortie: Une liste des récurences des fichiers (sortie.txt)
 #> 
-$already = @()
-$array= Get-ChildItem . -Recurse | Select-Object Name,FullName
 Clear-Content .\sortie.txt
-foreach ($item in $array) {
-    $length = 0
-    $arr = @($($item.Name + ":"), $item.FullName)
-    $alrExist = "false"
-    foreach ($item2 in $already){
-        if ($item.FullName -eq $item2){
-            $alrExist = "true"
+foreach ($i in Get-ChildItem){
+    $array= Get-ChildItem -Recurse | Select-Object Name,FullName | Where-Object Name -Match $i
+    if ($array.Length -gt 1){
+        Add-Content .\sortie.txt ($i.name + ":")
+        foreach ($j in $array){
+            Add-Content .\sortie.txt $j.fullname
         }
-    }
-    if ($alrExist -eq "false"){
-        $already += $item.FullName
-        foreach ($item2 in $array){
-            if ($item.name -eq $item2.name) {
-                if (!($item.FullName -eq $item2.FullName )) {
-                    $arr += $item2.FullName
-                    $already += $item2.FullName
-                    $length++
-                }
-            }
-        }
-       
-        if ($length -gt 0){
-            for ($i = 0; $i -le $($length + 1); $i++){
-                Add-Content .\sortie.txt $arr[$i]
-            }
-        }
+        Add-Content .\sortie.txt "....`n"
     }
 }
